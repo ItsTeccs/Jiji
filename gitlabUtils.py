@@ -22,9 +22,6 @@ def getDeltaIsoMinutes(t0):
     t0 = datetime.fromisoformat(t0)
     t1 = datetime.now(tz=timezone.utc)
 
-    print(t0)
-    print(t1)
-
     delta = t1 - t0
     return math.floor(delta.seconds / 60)
 
