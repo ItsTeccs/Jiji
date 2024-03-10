@@ -13,11 +13,11 @@ CONTEXT_PATH = "/slackbot"
 app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
+
 @app.route(CONTEXT_PATH, methods=['POST'])
 def receive_data():
     try:
         data = request.get_json()
-        # print(data)
     except:
         return
 
@@ -30,22 +30,12 @@ def receive_data():
         mergeId = attrs["iid"]
         created_at = attrs["created_at"]
 
-        # print("unf: " + created_at)
-
-        # print(created_at)
-        # print(gitlabUtils.apiTimeStrMalformed(created_at))
         if gitlabUtils.apiTimeStrMalformed(created_at):
             # if the data comes in the form of malformed ISO from gitlab api, format it correctly..
             created_at = gitlabUtils.apiTimeStrToIso((created_at))
-        # print(created_at)
-        # print(gitlabUtils.getDeltaIsoMinutes(created_at))
-
-        # print("fil : " + created_at)
 
         mergeExistsInDb = gitlabsqlite.mergeRequestExists(mergeId)
         deltaTime = gitlabUtils.getDeltaIsoMinutes(created_at)
-
-        # print("min: " + str(deltaTime))
 
         if not mergeExistsInDb:
             mrIsOld = deltaTime > NEW_MR_EXPIRE_MINUTES
