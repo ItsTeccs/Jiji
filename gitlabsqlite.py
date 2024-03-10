@@ -1,10 +1,12 @@
+import os
 import sqlite3
 import gitlab
 import datetime
 import json
 
 FILENAME = "database.db"
-TOKEN = "glpat-FJGNRUxy8LE4_2xxG_Er"
+TOKEN = os.environ.get("GITLAB_TOKEN")
+
 def init():
     # Connect to the database (create it if it doesn't exist)
     conn = sqlite3.connect(FILENAME)

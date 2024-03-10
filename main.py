@@ -3,16 +3,8 @@ import logging
 import gitlabsqlite
 import gitlabUtils
 import slackWrapper
-TEST_PROJECT_ID = 55706687
+
 NEW_MR_EXPIRE_MINUTES = 1
-
-gitlabsqlite.parseOpenMergeRequests(TEST_PROJECT_ID)
-
-# print(gitlabsqlite.mergeRequestExists(287648705))
-# data = gitlabsqlite.getMergeRequest(287648705)
-
-#print(data)
-#print(gitlabUtils.getDeltaIsoMinutes(data["created_at"]))
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
